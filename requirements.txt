@@ -1,0 +1,5 @@
+beautifulsoup4==4.9.1
+darkpoint==3.8_221
+poster==0.8.1
+requests==2.25.0
+unirest==1.1.7
