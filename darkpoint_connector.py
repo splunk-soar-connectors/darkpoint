@@ -16,20 +16,23 @@
 #
 # Phantom App imports
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
+
 try:
     from phantom.vault import Vault
 except:
     import phantom.vault as Vault
 
-import requests
 import json
 import time
-from darkpoint_consts import *
+
+import requests
 from bs4 import BeautifulSoup
-from darkpointrest.darkpoint import Darkpoint, AuthenticationError, ValidationError
+from darkpointrest.darkpoint import AuthenticationError, Darkpoint, ValidationError
 from darkpointrest.exceptions import DarkpointRESTException
+
+from darkpoint_consts import *
 
 
 class RetVal(tuple):
@@ -502,8 +505,9 @@ class DarkpointConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import pudb
     import argparse
+
+    import pudb
 
     pudb.set_trace()
 
