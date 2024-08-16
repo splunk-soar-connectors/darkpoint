@@ -2,16 +2,16 @@
 # DarkPoint
 
 Publisher: Splunk  
-Connector Version: 1\.0\.5  
+Connector Version: 1.0.7  
 Product Vendor: CyberPoint  
 Product Name: DarkPoint  
-Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 4\.2\.7532  
+Product Version Supported (regex): ".\*"  
+Minimum Product Version: 4.2.7532  
 
 This app supports executing investigative actions on the DarkPoint sandbox
 
 [comment]: # ""
-[comment]: # "File: readme.md"
+[comment]: # "File: README.md"
 [comment]: # ""
 [comment]: # "Copyright (c) 2019 Splunk Inc."
 [comment]: # ""
@@ -28,8 +28,8 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
 **username** |  required  | string | Username
 **password** |  required  | password | Password
-**base\_url** |  required  | string | Base URL to DarkPoint Service
-**detonate\_timeout** |  optional  | numeric | Detonate Timeout in Minutes
+**base_url** |  required  | string | Base URL to DarkPoint Service
+**detonate_timeout** |  optional  | numeric | Detonate Timeout in Minutes
 
 ### Supported Actions  
 [test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration  
@@ -58,32 +58,32 @@ Read only: **True**
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**vault\_id** |  required  | Vault ID of file to detonate | string |  `vault id`  `pe file`  `pdf`  `flash`  `apk`  `jar`  `doc`  `xls`  `ppt` 
-**file\_name** |  optional  | Filename to use | string |  `file name` 
+**vault_id** |  required  | Vault ID of file to detonate | string |  `vault id`  `pe file`  `pdf`  `flash`  `apk`  `jar`  `doc`  `xls`  `ppt` 
+**file_name** |  optional  | Filename to use | string |  `file name` 
 
 #### Action Output
-DATA PATH | TYPE | CONTAINS
---------- | ---- | --------
-action\_result\.status | string | 
-action\_result\.parameter\.file\_name | string |  `file name` 
-action\_result\.parameter\.vault\_id | string |  `vault id`  `pe file`  `pdf`  `flash`  `apk`  `jar`  `doc`  `xls`  `ppt` 
-action\_result\.data\.\*\.report\.darkpointScore | numeric | 
-action\_result\.data\.\*\.report\.descendents | numeric | 
-action\_result\.data\.\*\.report\.hasPacker | boolean | 
-action\_result\.data\.\*\.report\.hasPackerChild | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirus | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirusChild | boolean | 
-action\_result\.data\.\*\.report\.hasRemediation | boolean | 
-action\_result\.data\.\*\.report\.hasVirusChild | boolean | 
-action\_result\.data\.\*\.report\.highestMalwareRating | numeric | 
-action\_result\.data\.\*\.report\.processed | numeric | 
-action\_result\.data\.\*\.report\.score | numeric | 
-action\_result\.data\.\*\.report\.sha1 | string |  `sha1` 
-action\_result\.summary | string | 
-action\_result\.message | string | 
-summary\.darkpointScore | numeric | 
-summary\.total\_objects | numeric | 
-summary\.total\_objects\_successful | numeric |   
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.status | string |  |   success  failed 
+action_result.parameter.file_name | string |  `file name`  |  
+action_result.parameter.vault_id | string |  `vault id`  `pe file`  `pdf`  `flash`  `apk`  `jar`  `doc`  `xls`  `ppt`  |  
+action_result.data.\*.report.darkpointScore | numeric |  |  
+action_result.data.\*.report.descendents | numeric |  |  
+action_result.data.\*.report.hasPacker | boolean |  |  
+action_result.data.\*.report.hasPackerChild | boolean |  |  
+action_result.data.\*.report.hasPotentialVirus | boolean |  |  
+action_result.data.\*.report.hasPotentialVirusChild | boolean |  |  
+action_result.data.\*.report.hasRemediation | boolean |  |  
+action_result.data.\*.report.hasVirusChild | boolean |  |  
+action_result.data.\*.report.highestMalwareRating | numeric |  |  
+action_result.data.\*.report.processed | numeric |  |  
+action_result.data.\*.report.score | numeric |  |  
+action_result.data.\*.report.sha1 | string |  `sha1`  |  
+action_result.summary | string |  |  
+action_result.message | string |  |  
+summary.darkpointScore | numeric |  |  
+summary.total_objects | numeric |  |  
+summary.total_objects_successful | numeric |  |    
 
 ## action: 'detonate url'
 Send a URL to DarkPoint and retrieve the analysis results
@@ -97,27 +97,27 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **url** |  required  | URL to detonate | string |  `url`  `domain` 
 
 #### Action Output
-DATA PATH | TYPE | CONTAINS
---------- | ---- | --------
-action\_result\.status | string | 
-action\_result\.parameter\.url | string |  `url`  `domain` 
-action\_result\.data\.\*\.report\.darkpointScore | numeric | 
-action\_result\.data\.\*\.report\.descendents | numeric | 
-action\_result\.data\.\*\.report\.hasPacker | boolean | 
-action\_result\.data\.\*\.report\.hasPackerChild | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirus | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirusChild | boolean | 
-action\_result\.data\.\*\.report\.hasRemediation | boolean | 
-action\_result\.data\.\*\.report\.hasVirusChild | boolean | 
-action\_result\.data\.\*\.report\.highestMalwareRating | numeric | 
-action\_result\.data\.\*\.report\.processed | numeric | 
-action\_result\.data\.\*\.report\.score | numeric | 
-action\_result\.data\.\*\.report\.sha1 | string |  `sha1` 
-action\_result\.summary | string | 
-action\_result\.message | string | 
-summary\.darkpointScore | numeric | 
-summary\.total\_objects | numeric | 
-summary\.total\_objects\_successful | numeric |   
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.status | string |  |   success  failed 
+action_result.parameter.url | string |  `url`  `domain`  |  
+action_result.data.\*.report.darkpointScore | numeric |  |  
+action_result.data.\*.report.descendents | numeric |  |  
+action_result.data.\*.report.hasPacker | boolean |  |  
+action_result.data.\*.report.hasPackerChild | boolean |  |  
+action_result.data.\*.report.hasPotentialVirus | boolean |  |  
+action_result.data.\*.report.hasPotentialVirusChild | boolean |  |  
+action_result.data.\*.report.hasRemediation | boolean |  |  
+action_result.data.\*.report.hasVirusChild | boolean |  |  
+action_result.data.\*.report.highestMalwareRating | numeric |  |  
+action_result.data.\*.report.processed | numeric |  |  
+action_result.data.\*.report.score | numeric |  |  
+action_result.data.\*.report.sha1 | string |  `sha1`  |  
+action_result.summary | string |  |  
+action_result.message | string |  |  
+summary.darkpointScore | numeric |  |  
+summary.total_objects | numeric |  |  
+summary.total_objects_successful | numeric |  |    
 
 ## action: 'get report'
 Query for results of an already completed detonation
@@ -131,24 +131,24 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **id** |  required  | Detonation ID to get the report of | string | 
 
 #### Action Output
-DATA PATH | TYPE | CONTAINS
---------- | ---- | --------
-action\_result\.status | string | 
-action\_result\.parameter\.id | string | 
-action\_result\.data\.\*\.report\.darkpointScore | numeric | 
-action\_result\.data\.\*\.report\.descendents | numeric | 
-action\_result\.data\.\*\.report\.hasPacker | boolean | 
-action\_result\.data\.\*\.report\.hasPackerChild | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirus | boolean | 
-action\_result\.data\.\*\.report\.hasPotentialVirusChild | boolean | 
-action\_result\.data\.\*\.report\.hasRemediation | boolean | 
-action\_result\.data\.\*\.report\.hasVirusChild | boolean | 
-action\_result\.data\.\*\.report\.highestMalwareRating | numeric | 
-action\_result\.data\.\*\.report\.processed | numeric | 
-action\_result\.data\.\*\.report\.score | numeric | 
-action\_result\.data\.\*\.report\.sha1 | string |  `sha1` 
-action\_result\.summary | string | 
-action\_result\.message | string | 
-summary\.darkpointScore | numeric | 
-summary\.total\_objects | numeric | 
-summary\.total\_objects\_successful | numeric | 
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.status | string |  |   success  failed 
+action_result.parameter.id | string |  |  
+action_result.data.\*.report.darkpointScore | numeric |  |  
+action_result.data.\*.report.descendents | numeric |  |  
+action_result.data.\*.report.hasPacker | boolean |  |  
+action_result.data.\*.report.hasPackerChild | boolean |  |  
+action_result.data.\*.report.hasPotentialVirus | boolean |  |  
+action_result.data.\*.report.hasPotentialVirusChild | boolean |  |  
+action_result.data.\*.report.hasRemediation | boolean |  |  
+action_result.data.\*.report.hasVirusChild | boolean |  |  
+action_result.data.\*.report.highestMalwareRating | numeric |  |  
+action_result.data.\*.report.processed | numeric |  |  
+action_result.data.\*.report.score | numeric |  |  
+action_result.data.\*.report.sha1 | string |  `sha1`  |  
+action_result.summary | string |  |  
+action_result.message | string |  |  
+summary.darkpointScore | numeric |  |  
+summary.total_objects | numeric |  |  
+summary.total_objects_successful | numeric |  |  
