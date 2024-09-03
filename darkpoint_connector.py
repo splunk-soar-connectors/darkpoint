@@ -1,6 +1,6 @@
 # File: darkpoint_connector.py
 #
-# Copyright (c) 2019 Splunk Inc.
+# Copyright (c) 2019-2024 Splunk Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,9 +61,9 @@ class DarkpointConnector(BaseConnector):
 
             return RetVal(phantom.APP_SUCCESS, dp_client)
         except AuthenticationError as aerr:
-            return RetVal(action_result.set_status( phantom.APP_ERROR, "Error authenticating with DarkPoint service. Details: {0}".format(str(aerr))), None)
+            return RetVal(action_result.set_status( phantom.APP_ERROR, ERROR_AUTHENTICATING_TO_SERVER.format(str(aerr))), None)
         except Exception as aerr:
-            return RetVal(action_result.set_status( phantom.APP_ERROR, "Error while connecting to the server. Details: {0}".format(str(aerr))), None)
+            return RetVal(action_result.set_status( phantom.APP_ERROR, ERROR_CONNECTING_TO_SERVER.format(str(aerr))), None)
 
     def _get_vault_payload(self, param, action_result):
         vault_id = param['vault_id']
@@ -228,7 +228,7 @@ class DarkpointConnector(BaseConnector):
             else:
                 return RetVal(action_result.set_status(phantom.APP_ERROR, 'No artifacts found'), None)
         except DarkpointRESTException as dpre:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, 'Error encountered while retrieving artifact entries.\r\n{0}'.format(dpre)), None)
+            return RetVal(action_result.set_status(phantom.APP_ERROR, ERROR_RETRIEVING_ARTIFACT.format(dpre)), None)
 
         return (phantom.APP_SUCCESS, detonation_report)
 
@@ -246,8 +246,7 @@ class DarkpointConnector(BaseConnector):
             try:
                 status = dp_client.workflow.status(users=[self._username], sha1s=[sha1])
             except Exception as e:
-                return (action_result.set_status(phantom.APP_ERROR,
-                            "Error occurred while fetching the workflow status of the user: {0} and SHA1 hash: {1}. Error: {2}".format(self._username, sha1, str(e))), None)
+                return (action_result.set_status(phantom.APP_ERROR, ERROR_WHILE_FATCHING_WORKFLOW.format(self._username, sha1, str(e))), None)
             estimated_artifacts_queued = status['count']
             if estimated_artifacts_queued == 0:
                 ret_val, response = self._check_detonated_report(sha1, action_result)
@@ -282,7 +281,8 @@ class DarkpointConnector(BaseConnector):
         except DarkpointRESTException as dpre:
             return action_result.set_status(phantom.APP_ERROR, 'Error encountered while retrieving artifact SHA1s.\r\n{0}'.format(dpre))
         except ValidationError as verr:
-            return action_result.set_status(phantom.APP_ERROR, 'ValidationError encountered while retrieving artifact SHA1s.\r\n{0}'.format(verr))
+            return action_result.set_status(phantom.APP_ERROR,
+                                            'ValidationError encountered while retrieving artifact SHA1s.\r\n{0}'.format(verr))
 
         # Return success
         self.save_progress("Test Connectivity Passed")
@@ -532,7 +532,7 @@ if __name__ == '__main__':
     if (username and password):
         try:
             login_url = BaseConnector._get_phantom_base_url() + "login"
-            print ("Accessing the Login page")
+            print("Accessing the Login page")
             r = requests.get(login_url, verify=False)
             csrftoken = r.cookies['csrftoken']
 
@@ -545,11 +545,11 @@ if __name__ == '__main__':
             headers['Cookie'] = 'csrftoken=' + csrftoken
             headers['Referer'] = login_url
 
-            print ("Logging into Platform to get the session id")
+            print("Logging into Platform to get the session id")
             r2 = requests.post(login_url, verify=False, data=data, headers=headers)
             session_id = r2.cookies['sessionid']
         except Exception as e:
-            print ("Unable to get session id from the platfrom. Error: " + str(e))
+            print("Unable to get session id from the platfrom. Error: " + str(e))
             exit(1)
 
     with open(args.input_test_json) as f:
@@ -565,6 +565,6 @@ if __name__ == '__main__':
             connector._set_csrf_info(csrftoken, headers['Referer'])
 
         ret_val = connector._handle_action(json.dumps(in_json), None)
-        print (json.dumps(json.loads(ret_val), indent=4))
+        print(json.dumps(json.loads(ret_val), indent=4))
 
     exit(0)
